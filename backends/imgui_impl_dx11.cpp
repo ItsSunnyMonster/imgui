@@ -726,3 +726,9 @@ static void ImGui_ImplDX11_ShutdownPlatformInterface()
 {
     ImGui::DestroyPlatformWindows();
 }
+
+void ImGui_ImplDX11_ReCreateFontsTexture() {
+    if (ImGui_ImplDX11_GetBackendData()->pFontSampler) { ImGui_ImplDX11_GetBackendData()->pFontSampler->Release(); ImGui_ImplDX11_GetBackendData()->pFontSampler = NULL; }
+    if (ImGui_ImplDX11_GetBackendData()->pFontTextureView) { ImGui_ImplDX11_GetBackendData()->pFontTextureView->Release(); ImGui_ImplDX11_GetBackendData()->pFontTextureView = NULL; ImGui::GetIO().Fonts->SetTexID(NULL); }
+    ImGui_ImplDX11_CreateFontsTexture();
+}
